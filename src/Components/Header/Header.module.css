@@ -1,0 +1,68 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+}
+.default_theme{
+    background-color: #3e3f56;
+}
+.light_theme{
+    background-color:white;
+}
+.button{
+    font-size: 1em;
+    font-family: 'Roboto', sans-serif;
+    padding: 1em;
+    text-align: center;
+}
+.button:not(:first-child) {
+    margin-left: 1em;
+}
+.buttonColor_default{
+    color: white;
+    background-color:#c95667;
+}
+.buttonColor_light{
+    color: white;
+    background-color:#350134;
+}
+.header__right{
+    flex:1;
+    display: flex; 
+    justify-content: end;
+    align-items: center;
+}
+.header__left{
+    flex:1;
+    display: flex;
+    align-items: center;
+}
+.header__search{
+    flex:1;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    color:white;
+}
+.header__nav{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.header__select{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.header__select span{
+    margin-right: 1em;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+}
+.color_default{
+    color:white;
+}
+.color_light{
+    color:black;
+}
