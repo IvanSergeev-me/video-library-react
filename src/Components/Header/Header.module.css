@@ -1,8 +1,17 @@
+/*
+
+height need to be:
+@import "../../index.css";
+height: var(--hex-parent-height);
+
+*/
+
 .header{
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1em;
+    height: 80px;
 }
 .default_theme{
     background-color: #3e3f56;
@@ -30,7 +39,7 @@
 .header__right{
     flex:1;
     display: flex; 
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
 }
 .header__left{

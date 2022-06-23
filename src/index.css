@@ -39,4 +39,8 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 #root{
   height: 100%;
 }
+.main_section{
+	--hex-parent-height: 80px;
+	height: calc(100% - var(--hex-parent-height));
+}
 /*--------------------*/

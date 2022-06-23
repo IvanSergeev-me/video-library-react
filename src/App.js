@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import {Provider, connect,useSelector} from "react-redux";
 import store from './Redux/redux-store';
-
+import './index.css';
 import Library from './Components/Library/Library';
 import Load from './Components/Load/Load';
 import Header from './Components/Header/Header';
@@ -12,11 +12,12 @@ const App = (props) =>{
   return(
     <>
       <Header />
-      <main style={{ width: "100%", height: "100%" }}>
+      <main className="main_section">
         <Routes>
           <Route path="/" element={<Library />} />
           <Route path="load" element={<Load />} />
         </Routes>
+        
       </main>
     </>
   );
