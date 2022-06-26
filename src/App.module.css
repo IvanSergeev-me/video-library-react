@@ -1,0 +1,10 @@
+.default_theme{
+    background-color: #3e3f56;
+}
+.main_section{
+    --hex-parent-height: 80px;
+	min-height: calc(100% - var(--hex-parent-height));
+}
+.light_theme{
+
+}

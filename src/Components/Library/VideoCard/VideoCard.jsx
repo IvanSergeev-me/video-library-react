@@ -14,10 +14,11 @@ const VideoCard = (props) =>{
         <div className={styles.video_container}>
             <div onMouseEnter={onVideoMouseEnter} onMouseLeave={onVideoMouseEnter} className={styles.video_container__video}>
                 <img className={styles.video__preview} src={picture} alt="video_preview" />
-                {mouseOnVideo?<div className={styles.video__description}>
+                {mouseOnVideo?
+                <div className={styles.video__description}>
                     <p className={styles.description__date}>{props.addDate}</p>
                     <p className={styles.description__text}>{props.description}</p>
-                    </div>:null}
+                </div>:null}
             </div>
             <div className={styles.video_container__info}>
                 <p className={getTextClass(props.theme, styles, "info__video_name")}>{props.name}</p>

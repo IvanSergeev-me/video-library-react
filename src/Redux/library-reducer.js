@@ -1,38 +1,33 @@
+import { PlaylistAPI } from "../Api/API";
 
+const SET_LIBRARY = "library-reducer/SET_LIBRARY";
 
 let initialState = {
+    isEmpty: true,
     playlists:[
         //Объект Категория
         {
             //Ид самой категории
-            id: 123,
+            id: 0,
             //Ид создателя
-            creatorId:null,
+            creator_id:null,
             //Название категории
-            name:"Abobus",
+            name:"",
             //Приоритет (задается пользователем)
             priority:0,
             //Дата создания плейлиста
-            creationDate:"6 june, 20:20",
+            creation_date:"",
             //Видео внутри плейлиста
             videos:[
                 //Объект Видео
                 {
-                    id:1,
-                    link:"https://www.youtube.com/watch?v=tyXOcT33df8",
-                    name:"test1",
-                    description:"Тестовое описание для видео под номером 1. Тут по наведеню отображается описание к видео, которое добавляет пользователь.",
+                    id:0,
+                    link:"",
+                    name:"",
+                    description:"",
                     priority:0,
-                    addDate:"6 june, 20:20",
+                    add_date:"",
                 },
-                {
-                    id:2,
-                    link:"https://www.youtube.com/watch?v=tyXOcT33df8",
-                    name:"test2",
-                    description:"Тестовое описание для видео под номером 2. Тут по наведеню отображается описание к видео, которое добавляет пользователь.",
-                    priority:0,
-                    addDate:"6 june, 20:20",
-                }
             ]
         },
     ]
@@ -40,18 +35,16 @@ let initialState = {
 const libraryReducer = (state = initialState, action) => {
     
     switch (action.type) {
-
+        case SET_LIBRARY:{
+            return {...state, playlists:action.playlists, isEmpty:false}
+        }
         default: return state;
     };
 };
-
-
+export const setLibrary = (playlists) => ({type:SET_LIBRARY, playlists});
+export const  getPlaylistsThunk = () => async (dispatch) =>{  
+    let creator_id = 1;  
+    let response = await PlaylistAPI.getPlaylists(creator_id);
+        dispatch(setLibrary(response.data));
+};
 export default libraryReducer;
-
-/*
-{
-
-}
-
-
-*/

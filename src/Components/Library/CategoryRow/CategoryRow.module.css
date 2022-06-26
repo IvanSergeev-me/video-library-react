@@ -1,0 +1,16 @@
+.button{
+    font-size: 1em;
+    font-family: 'Roboto', sans-serif;
+    padding: 1em;
+    margin-top: 10px;
+    max-width: 200px;
+    text-align: center;
+}
+.buttonColor_default{
+    color: white;
+    background-color:#c95667;
+}
+.buttonColor_light{
+    color: white;
+    background-color:#350134;
+}

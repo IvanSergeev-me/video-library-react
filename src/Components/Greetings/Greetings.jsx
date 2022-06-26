@@ -1,14 +1,11 @@
 import React from "react";
 import styles from './Greetings.module.css';
-import classNames from "classnames/bind";
 import { useSelector } from "react-redux";
 import Carousel from 'react-spring-3d-carousel';
 import { config } from "react-spring";
 import {slides} from "./slides.js";
 import {getButtonClass, getSectionClass, getTextClass} from "../../Assets/classHelper/classHelper";
 import { NavLink } from "react-router-dom";
-
-let cx = classNames.bind(styles);
 
 const Greetings = (props) =>{
 
