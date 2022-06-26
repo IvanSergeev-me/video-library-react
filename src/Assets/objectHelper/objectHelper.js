@@ -9,7 +9,6 @@ export const isVideosEmpty = (videos) =>{
             priority:0,
             add_date:"",
         }
-        console.log(videos);
     if (videos.length === 0) return true;
     if (shallowEqual(videos[0],initialVideosArr)) {return true};
     return false;

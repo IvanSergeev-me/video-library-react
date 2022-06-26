@@ -12,7 +12,6 @@ export const FormControl = ({input, meta: {touched, error}, children}) =>{
         </div>  
     )
 }
-// + " " + (hasError?s.login_form__input_error:"")
 export const Input = (props) =>{
     const {input, meta, child, ...restProps} = props;
     const hasError = meta.touched && meta.error;

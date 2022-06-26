@@ -45,8 +45,10 @@
     margin-top: 1em;
 }
 .video_container{
+    max-width: 310px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
 .video_container__video{
     position: relative;
@@ -55,6 +57,12 @@
     width: var(--dimension);
     height: var(--dimension);
     margin-bottom: 10px;
+}
+.video_container__info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
 }
 .info__video_name{
     margin-bottom: 10px;

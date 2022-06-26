@@ -7,6 +7,9 @@ export const PlaylistAPI = {
     getPlaylists(creatorId){
         return instance.get(`getPlaylists.php?creator_id=${creatorId}`);
     },
+    getPlaylist(id){
+        return instance.get(`getPlaylist.php?id=${id}`)
+    },
     deletePlaylist(id){
         return instance.post(`removePlaylist.php`, {id})
     },

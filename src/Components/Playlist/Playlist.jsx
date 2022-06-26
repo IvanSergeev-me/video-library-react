@@ -6,22 +6,24 @@ import { getButtonClass, getSectionClass, getTextClass } from "../../Assets/clas
 import VideoCard from "../Library/VideoCard/VideoCard";
 import pencil from "../../Assets/Images/pencil.png";
 import cross from "../../Assets/Images/close.png";
-import { deletePlaylist, updateDescription, updateTitle, deleteDescription } from "../../Redux/playlist-reducer";
+import { deletePlaylist, updateDescription, updateTitle, deleteDescription, getPlaylistThunk } from "../../Redux/playlist-reducer";
 
 const Playlist = (props) =>{
     let params = useParams();
-    let playlist = useSelector(state => state.playlist); //Временно (получать с запроса)
+    let playlist = useSelector(state => state.playlist.playlist);
     let theme = useSelector(state => state.appInit.theme);
     let dispatch = useDispatch();
     let [titleEditMode, toggleTitleEditMode] = useState(false);
-    let [title, setTitle] = useState(playlist.name);//Временно (получать с запроса)
+    let [title, setTitle] = useState(playlist.name);
 
     let [descrEditMode, toggleDescrEditMode] = useState(false);
     let [description, setDescription] = useState(playlist.description);
 
     useEffect(()=>{
+        dispatch(getPlaylistThunk(params.id));
         setTitle(playlist.name);
         setDescription(playlist.description);
+        // eslint-disable-next-line
     },[playlist.name, playlist.description]);
 
     let toggleEditTitle = (param) =>{
@@ -118,7 +120,6 @@ const Playlist = (props) =>{
                     </button>
                 </div>
             </div>
-            playlist #{params.id}
             <div className={styles.playlist_section__videos}>
                 {videos}
             </div>

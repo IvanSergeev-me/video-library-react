@@ -21,7 +21,7 @@ const Greetings = (props) =>{
                 Этот сайт помогает в создании различных видеобиблиотек, которыми управляет пользователь.<br />То, что вы сможете получить, показано на картинках ниже. Приятного использования!
                 </p></div>
                 <div className={styles.Carousel}>
-                    <Carousel slides={slides} showNavigation={true} animationConfig={config.wobbly} goToSlideDelay={1000} goToSlide={5}/>
+                    <Carousel slides={slides} showNavigation={true} animationConfig={config.wobbly} goToSlideDelay={1000} goToSlide={0}/>
                 </div>
                 <div className={styles.button_container}>
                     <NavLink to="/load" className={buttonColorClass}>Создать свою коллекцию</NavLink>

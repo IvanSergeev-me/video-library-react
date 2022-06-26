@@ -19,6 +19,7 @@ const VideoCard = (props) =>{
                     <p className={styles.description__date}>{props.addDate}</p>
                     <p className={styles.description__text}>{props.description}</p>
                 </div>:null}
+                
             </div>
             <div className={styles.video_container__info}>
                 <p className={getTextClass(props.theme, styles, "info__video_name")}>{props.name}</p>

@@ -32,7 +32,7 @@ const CategoryRow = (props) =>{
                 <NavLink to={`playlist/${props.id}`}><h3 className={getTextClass(theme, styles, "row_title")}>{props.name}</h3></NavLink>
                 <span className={styles.date_text}>{props.creationDate}</span>
             </div>
-            {isVideosEmpty(videos)?
+            {isVideosEmpty(props.videos)?
                     <div className={styles.videos__add_some_video}>
                         <p className={getTextClass(theme, styles, "videos__text")}>В этом плейлисте пока нет видео</p>
                         <NavLink className={getButtonClass(theme, buttonStyles)} to="/load">Загрузить видео</NavLink>

@@ -4,79 +4,45 @@ const UPDATE_TITLE = "playlist-reducer/UPDATE_TITLE";
 const DELETE_PLAYLIST = "playlist-reducer/DELETE_PLAYLIST";
 const DELETE_DESCRIPTION = "playlist-reducer/DELETE_DESCRIPTION";
 const UPDATE_DESCRIPTION = "playlist-reducer/UPDATE_DESCRIPTION";
+const SET_PLAYLIST = "playlist-reducer/SET_PLAYLIST";
 
 let initialState = {
     //Страница конкретного плейлиста
-    id:0,
-    name:"Test",
-    description:"Описание конкретного плейлиста пользователя, которое он сам задает",
-    creator_id:null,
-    priority:0,
-    creation_date:"6 june, 20:20",
-    //Структура элементов массива соотсветствует гл. страницеы
-    videos:[
-        {
-            id:1,
-            link:"https://www.youtube.com/watch?v=SmmUWN-VJCs",
-            name:"test1",
-            description:"Тестовое описание для видео под номером 1. Тут по наведеню отображается описание к видео, которое добавляет пользователь.",
-            priority:0,
-            add_date:"6 june, 20:20",
-        },
-        {
-            id:2,
-            link:"https://www.youtube.com/watch?v=SmmUWN-VJCs",
-            name:"test2",
-            description:"Тестовое описание для видео под номером 2. Тут по наведеню отображается описание к видео, которое добавляет пользователь.",
-            priority:0,
-            add_date:"6 june, 20:20",
-        },
-        {
-            id:3,
-            link:"https://www.youtube.com/watch?v=SmmUWN-VJCs",
-            name:"test3",
-            description:"Тестовое описание для видео под номером 2. Тут по наведеню отображается описание к видео, которое добавляет пользователь.",
-            priority:0,
-            add_date:"6 june, 20:20",
-        },
-        {
-            id:4,
-            link:"https://www.youtube.com/watch?v=SmmUWN-VJCs",
-            name:"test4",
-            description:"Тестовое описание для видео под номером 2. Тут по наведеню отображается описание к видео, которое добавляет пользователь.",
-            priority:0,
-            add_date:"6 june, 20:20",
-        },
-        {
-            id:5,
-            link:"https://www.youtube.com/watch?v=SmmUWN-VJCs",
-            name:"test5",
-            description:"Тестовое описание для видео под номером 2. Тут по наведеню отображается описание к видео, которое добавляет пользователь.",
-            priority:0,
-            add_date:"6 june, 20:20",
-        },
-        {
-            id:6,
-            link:"https://www.youtube.com/watch?v=SmmUWN-VJCs",
-            name:"test6",
-            description:"Тестовое описание для видео под номером 2. Тут по наведеню отображается описание к видео, которое добавляет пользователь.",
-            priority:0,
-            add_date:"6 june, 20:20",
-        },
-    ]
+    playlist:{
+        id:0,
+        name:"",
+        description:"",
+        creator_id:null,
+        priority:0,
+        creation_date:"",
+        videos:[
+            {
+                id:0,
+                link:"",
+                name:"",
+                description:"",
+                priority:0,
+                add_date:"",
+            },
+        ]
+    },
+    
 
 };
 const playlistReducer = (state = initialState, action) => {
     
     switch (action.type) {
+        case SET_PLAYLIST:
+            return {...state, playlist:action.playlist}
         case UPDATE_DESCRIPTION:    
-            return {...state,description:action.description};
+            return {...state,...state.playlist.description = action.description};
         case UPDATE_TITLE:    
-            return {...state,name:action.title};
+            return {...state,...state.playlist.name = action.title};
         case DELETE_PLAYLIST:    
-            return {...state,videos:[]};
+            return {...state,...state.playlist.videos = []};
         case DELETE_DESCRIPTION:
-            return {...state, description:"Нет описания."}
+
+            return {...state, ...state.playlist.description = "Нет описания."}
         default: return state;
     };
 };
@@ -85,11 +51,15 @@ export const updateTitle = (title) => ({type:UPDATE_TITLE, title});
 export const updateDescription = (description) => ({type:UPDATE_DESCRIPTION, description});
 export const deletePlaylist = () => ({type:DELETE_PLAYLIST});
 export const deleteDescription = () => ({type:DELETE_DESCRIPTION});
+export const setPlaylist = (playlist) => ({type:SET_PLAYLIST, playlist});
 
 export const  deletePlaylistThunk = (id) => async (dispatch) =>{  
-    let response = await PlaylistAPI.deletePlaylist(id);
-        //dispatch(deletePlaylist());
-        console.log(response.data);   
-};
+    //let response = await PlaylistAPI.deletePlaylist(id);
+}
+export const getPlaylistThunk = (id) => async (dispatch) =>{
+    let response = await PlaylistAPI.getPlaylist(id); 
+    dispatch(setPlaylist(response.data))
+    
+}
 
 export default playlistReducer;
