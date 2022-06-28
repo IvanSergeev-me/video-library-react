@@ -1,0 +1,25 @@
+.load_section{
+    display: flex;
+    padding: 0 1em 1em 1em;
+}
+.load_section__add_container{
+    padding: 0 0 0 1em;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.add_container__header{
+    font-size: 1.5em;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.add_container__form{
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+}
+.color_default{
+    color:white;
+}
+.color_light{
+    color:black;
+}

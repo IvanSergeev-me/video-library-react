@@ -48,11 +48,14 @@ height: var(--hex-parent-height);
     align-items: center;
 }
 .header__search{
+    user-select: none;
+    font-weight: 600;
+    font-size: 1em;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     flex:1;
     justify-content: center;
     align-items: center;
     display: flex;
-    color:white;
 }
 .header__nav{
     width: 100%;

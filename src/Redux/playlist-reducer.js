@@ -54,7 +54,8 @@ export const deleteDescription = () => ({type:DELETE_DESCRIPTION});
 export const setPlaylist = (playlist) => ({type:SET_PLAYLIST, playlist});
 
 export const  deletePlaylistThunk = (id) => async (dispatch) =>{  
-    //let response = await PlaylistAPI.deletePlaylist(id);
+    await PlaylistAPI.deletePlaylist(id);
+    dispatch(setPlaylist(initialState));
 }
 export const getPlaylistThunk = (id) => async (dispatch) =>{
     let response = await PlaylistAPI.getPlaylist(id); 

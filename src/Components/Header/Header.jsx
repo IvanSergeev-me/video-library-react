@@ -5,8 +5,9 @@ import classNames from "classnames/bind";
 import { useDispatch, useSelector } from "react-redux";
 import Select from 'react-select'
 import { setTheme } from "../../Redux/app-reducer";
-import { options, defaultStyles, lightStyles, defaultThemeSelect, lightThemeSelect} from "./Options";
+import { options, customStyles} from "./Options";
 import { getButtonClass, getTextClass } from "../../Assets/classHelper/classHelper";
+import { getStylesSelect } from "../../Assets/SelectHelper/SelectHelper";
 
 let cx = classNames.bind(styles);
 
@@ -26,8 +27,7 @@ const Header = (props) =>{
         dispatch(setTheme(payload));
     }
     
-    let stylesSelect = theme==="default"?defaultStyles:lightStyles;
-    let themeSelect = theme==="default"?defaultThemeSelect:lightThemeSelect;
+    let stylesSelect = getStylesSelect(theme, customStyles)
 
     return(
         <header className={headerClass}>
@@ -37,13 +37,13 @@ const Header = (props) =>{
                     <NavLink className={buttonColorClass} to="/load">Добавить</NavLink>
                 </nav>
             </div> 
-            <div className={styles.header__search}>
-                Тут поиск будет
+            <div className={getTextClass(theme, styles, "header__search")}>
+                Video Library
             </div>
             <div className={styles.header__right}>
                 <div className={styles.header__select}>
                     <span className={textColorClass}>Тема:</span>
-                    <Select onChange={onSelectChange} styles={stylesSelect} theme={themeSelect} options={options}  defaultValue={options[0]}/>
+                    <Select onChange={onSelectChange} styles={stylesSelect} options={options}  defaultValue={options[0]}/>
                 </div>
                 <NavLink className={buttonColorClass} to="/registration">Регистрация</NavLink>
                 <NavLink className={buttonColorClass} to="/login">Вход</NavLink>

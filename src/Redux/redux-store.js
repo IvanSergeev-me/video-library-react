@@ -3,10 +3,10 @@ import appReducer from "./app-reducer";
 import libraryReducer from "./library-reducer";
 import thunkMiddleware from 'redux-thunk';
 import playlistReducer from "./playlist-reducer";
-import { reducer as formReducer } from 'redux-form';
+import loadReducer from "./load-reducer";
 
 let reducers = combineReducers({
-    form: formReducer,
+    load:loadReducer,
     appInit: appReducer,
     library:libraryReducer,
     playlist:playlistReducer

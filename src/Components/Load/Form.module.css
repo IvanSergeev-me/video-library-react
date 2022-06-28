@@ -1,0 +1,70 @@
+.category_form__container{
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+.category_form__fields{
+    display: flex;
+}
+.error_label{
+    font-size: 1em;
+    font-family: "Roboto", sans-serif;
+}
+.category_form__input{
+    font-family: "Roboto", sans-serif;
+    padding: 10px;
+}
+.category_form__button{
+
+    font-family: "Roboto", sans-serif;
+    padding: 10px;
+}
+.buttonColor_default{
+    color: white;
+    background-color:#c95667;
+}
+.buttonColor_light{
+    color: white;
+    background-color:#350134;
+}
+.color_default{
+    color:rgb(255, 0, 157);
+}
+.color_light{
+    color:rgb(255, 0, 0);
+}
+.video_form__container{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+.video_form__fields{
+    display: flex;
+    flex-direction: column;
+    margin-top: 1em;
+}
+.video_form__button{
+    margin-top: 1em;
+    padding: 10px;
+    font-size: 1em;
+    font-family: "Roboto", sans-serif;
+}
+.video_form__input{
+    font-size: 1em;
+    font-family: "Roboto", sans-serif;
+    padding: 10px;
+    width: 100%;
+}
+.video_form__textarea{
+    font-size: 1em;
+    font-family: "Roboto", sans-serif;
+    padding: 10px;
+    width: 100%;
+    resize: none;
+}
+.default_theme{
+    border: 2px solid #c95667;
+}
+.light_theme{
+    border: 2px solid #350134;
+}

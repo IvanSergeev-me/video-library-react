@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate  } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import styles from "./Playlist.module.css"
 import { getButtonClass, getSectionClass, getTextClass } from "../../Assets/classHelper/classHelper";
 import VideoCard from "../Library/VideoCard/VideoCard";
 import pencil from "../../Assets/Images/pencil.png";
 import cross from "../../Assets/Images/close.png";
-import { deletePlaylist, updateDescription, updateTitle, deleteDescription, getPlaylistThunk } from "../../Redux/playlist-reducer";
+import { updateDescription, updateTitle, deleteDescription, getPlaylistThunk, deletePlaylistThunk } from "../../Redux/playlist-reducer";
 
 const Playlist = (props) =>{
     let params = useParams();
+    let navigate = useNavigate();
     let playlist = useSelector(state => state.playlist.playlist);
     let theme = useSelector(state => state.appInit.theme);
     let dispatch = useDispatch();
@@ -42,7 +43,8 @@ const Playlist = (props) =>{
     }
 
     let deleteThisPlaylist= (e) =>{
-        dispatch(deletePlaylist());
+        dispatch(deletePlaylistThunk(params.id));
+        navigate("/");
         e.preventDefault();
     }
     let deleteThisDescription= (e) =>{

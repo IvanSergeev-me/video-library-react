@@ -30,7 +30,7 @@ const CategoryRow = (props) =>{
         <div className={styles.category_row}>
             <div className={styles.category_row__heading}>
                 <NavLink to={`playlist/${props.id}`}><h3 className={getTextClass(theme, styles, "row_title")}>{props.name}</h3></NavLink>
-                <span className={styles.date_text}>{props.creationDate}</span>
+                <span className={styles.date_text}>создан {props.creationDate}</span>
             </div>
             {isVideosEmpty(props.videos)?
                     <div className={styles.videos__add_some_video}>

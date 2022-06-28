@@ -1,0 +1,44 @@
+.load_section__aside{
+    height: calc(100vh - 80px);
+    padding: 0 1em 0 0;
+    border-right: 1px solid transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.aside_top__header{
+    font-size: 1em;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 600;
+}
+.aside_top__categories{
+    display: flex;
+    flex-direction: column;
+}
+.aside__add_category_form{
+
+}
+.category_container{
+    margin-top: 1em;
+    cursor: pointer;
+}
+.selected_category{
+    padding-left: 5px;
+    border-left: 2px solid transparent;
+}
+.category_text{
+    font-size: 1em;
+    font-family: "Roboto", sans-serif;
+}
+.default_theme{
+    border-color: #c95667;
+}
+.light_theme{
+    border-color: #350134;
+}
+.color_default{
+    color:white;
+}
+.color_light{
+    color:black;
+}
