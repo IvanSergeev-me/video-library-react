@@ -6,7 +6,7 @@ import { getButtonClass, getSectionClass, getTextClass } from "../../Assets/clas
 import VideoCard from "../Library/VideoCard/VideoCard";
 import pencil from "../../Assets/Images/pencil.png";
 import cross from "../../Assets/Images/close.png";
-import { updateDescription, updateTitle, deleteDescription, getPlaylistThunk, deletePlaylistThunk, deletePlaylist } from "../../Redux/playlist-reducer";
+import { deleteDescription, getPlaylistThunk, deletePlaylistThunk, deletePlaylist, updatePlaylist } from "../../Redux/playlist-reducer";
 import { withTheme } from "../HOC/withTheme";
 import { getPlaylistsThunk } from "../../Redux/library-reducer";
 
@@ -23,32 +23,38 @@ const Playlist = (props) =>{
     let [descrEditMode, toggleDescrEditMode] = useState(false);
     let [description, setDescription] = useState(playlist.description);
 
+    let [items, setItems] = useState(playlist.videos);
+    let [currentItem, setCurrentItem] = useState(null);
+    
     //Mount
     useEffect(()=>{
+        console.log("effect")
         dispatch(getPlaylistThunk(params.id));
         setTitle(playlist.name);
         setDescription(playlist.description);
+        setItems(playlist.videos.map(v => {v.priority = v.id; return v}))//Костыли
         // eslint-disable-next-line
     },[playlist.name, playlist.description]);
 
     //Unmount
     useEffect(() => {
         return () => {
-          dispatch(deletePlaylist())
+            dispatch(deletePlaylist())
         }
         // eslint-disable-next-line
       }, []);
+
     let toggleEditTitle = (param) =>{
         if (param === "title"){
             titleEditMode?toggleTitleEditMode(false):toggleTitleEditMode(true);
             if(titleEditMode){
-                dispatch(updateTitle(title));
+                dispatch(updatePlaylist(params.id, title, description));
             }
         }
         if (param === "descr"){
             descrEditMode?toggleDescrEditMode(false):toggleDescrEditMode(true);
             if(descrEditMode){
-                dispatch(updateDescription(description));
+                dispatch(updatePlaylist(params.id, title, description));
             }
         }
     }
@@ -64,14 +70,51 @@ const Playlist = (props) =>{
         e.preventDefault();
     }
     let onTitleChange = (e) =>{
-        setTitle(e.currentTarget.value);
+        setTitle(e.currentTarget.value)
     }
     let onDescriptionChange = (e) =>{
         setDescription(e.currentTarget.value);
     }
     
-    let videos = playlist.videos.sort((a,b)=>{if (a.priority > b.priority) {return 1;}if (a.name < b.name) {return -1;}return 0})
+    const dragStart = (e, video) => {
+        setCurrentItem(video)
+    }
+
+    const dragLeave = (e, position) => {
+        e.target.style.background = "";
+    }
+
+    const dragOver = (e) =>{
+        e.target.style.background = "grey";
+        e.preventDefault();
+    }
+
+    const dragEnd = (e) =>{
+        e.target.style.background = "";
+    }
+
+    const drop = (e, video) => {
+        setItems(items.map((item)=>{
+        if(item.id === video.id){
+            return {...item, priority:currentItem.priority}
+        }
+        if(item.id === currentItem.id){
+            return{...item, priority:video.priority}
+        }
+        return item;
+        }))
+        e.target.style.background = "";
+        e.preventDefault();
+    };
+
+    let videos = items.sort((a,b)=>{if (a.priority > b.priority) {return 1;}else {return -1;}})
     .map(video=><VideoCard
+        onDragStart={(e) => dragStart(e, video)}
+        onDragLeave={dragLeave}
+        onDragOver={dragOver}
+        onDragEnd={dragEnd}
+        onDrop={(e) => drop(e, video)}
+        draggable={true}
         key = {video.id}
         id = {video.id}
         link = {video.link}
@@ -96,7 +139,7 @@ const Playlist = (props) =>{
                 </div>:
                 <h2 
                     onDoubleClick={(e)=>{toggleEditTitle("title"); e.preventDefault();}} 
-                    className={getTextClass(theme, styles, "heading__title")}>Ваш плейлист - {playlist.name}
+                    className={getTextClass(theme, styles, "heading__title")}>Ваш плейлист - {title}
                 </h2>}
                 <button 
                     onClick={(e)=>{toggleEditTitle("title"); e.preventDefault();}} 
@@ -120,7 +163,7 @@ const Playlist = (props) =>{
                     onChange={onDescriptionChange}/>:
                     <p 
                         onDoubleClick={(e)=>{toggleEditTitle("descr"); e.preventDefault();}} 
-                        className={getTextClass(theme, styles, "description__text")}>{playlist.description}
+                        className={getTextClass(theme, styles, "description__text")}>{description}
                     </p>}
                 <div className={styles.description__buttons}>
                     <button 

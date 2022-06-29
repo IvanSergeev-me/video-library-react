@@ -28,7 +28,18 @@ export const PlaylistAPI = {
             description: "",
         }
         return instance.post(`addPlaylist.php`, playlist, headers);
-    }
+    },
+    editPlaylist(id, name, description){
+        let toEdit = {
+            id:id,
+            name:name,
+            description:description
+        }
+        return instance.post(`editPlaylist.php`,toEdit);
+    },
+    changePriority(priority){
+        return instance.post(`changePriorityPlaylist.php`, priority)
+    },
 };
 export const VideoAPI = {
     addVideo(playlist_id, name, description, link){
@@ -39,6 +50,14 @@ export const VideoAPI = {
             link:link
         }
         return instance.post(`addVideo.php`, video);
+    },
+    editVideo(id, name, description){
+        let toEdit = {
+            id:id,
+            name:name,
+            description:description
+        }
+        return instance.post(`editVideo.php`,toEdit);
     }
 
 }

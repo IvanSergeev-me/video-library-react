@@ -13,7 +13,12 @@ const VideoCard = (props) =>{
     }
     
     return(
-        <div 
+        <div draggable={props.draggable} 
+            onDragStart={props.onDragStart}
+            onDragLeave={props.onDragLeave}
+            onDragOver={props.onDragOver}
+            onDragEnd={props.onDragEnd} 
+            onDrop={props.onDrop} 
             className={styles.video_container}>
             <div onMouseEnter={onVideoMouseEnter} onMouseLeave={onVideoMouseEnter} className={styles.video_container__video}>
                 <img className={styles.video__preview} src={picture} alt="video_preview" />
@@ -32,32 +37,3 @@ const VideoCard = (props) =>{
     )
 }
 export default VideoCard;
-/*
-draggable={true} 
-            onDragStart={e => dragStartHandler(e)} 
-            onDragOver={e => dragOverHandler(e)}
-            onDragLeave={e => dragLeaveHandler(e)}
-            onDragEnd={e=>dragEndHandler(e)}
-            onDrop={e => dropHandler(e)}
-
-            let dragStartHandler = (e) =>{
-        console.log("drug")
-        e.preventDefault();
-    }
-    let dragOverHandler = (e) =>{
-        console.log("over")
-        e.preventDefault();
-    }
-    let dragLeaveHandler = (e) =>{
-        console.log("leave")
-        e.preventDefault();
-    }
-    let dragEndHandler = (e) =>{
-        console.log("end")
-        e.preventDefault();
-    }
-    let dropHandler = (e) =>{
-        console.log("drop")
-        e.preventDefault();
-    }
-            */

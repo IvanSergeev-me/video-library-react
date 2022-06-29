@@ -34,10 +34,18 @@ const playlistReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_PLAYLIST:
             return {...state, playlist:action.playlist, isEmpty:false}
-        case UPDATE_DESCRIPTION:    
-            return {...state,...state.playlist.description = action.description};
-        case UPDATE_TITLE:    
-            return {...state, ...state.playlist.name = action.title};
+        case UPDATE_DESCRIPTION:{
+            let description = action.description;
+            let newPlaylist = state.playlist;
+            newPlaylist.description = description;
+            return {...state,playlist:newPlaylist}
+        }           
+        case UPDATE_TITLE: {
+            let title = action.title;
+            let newPlaylist = state.playlist;
+            newPlaylist.name = title;
+            return {...state,playlist:newPlaylist}
+        }           
         case DELETE_PLAYLIST:    
             return {...state,playlist:initialState.playlist, isEmpty:true};
         case DELETE_DESCRIPTION:
@@ -55,6 +63,12 @@ export const setPlaylist = (playlist) => ({type:SET_PLAYLIST, playlist});
 export const  deletePlaylistThunk = (id) => async (dispatch) =>{  
     await PlaylistAPI.deletePlaylist(id);
     dispatch(deletePlaylist());
+}
+export const updatePlaylist = (id, name, description) => async (dispatch) =>{
+    console.log(id, name, description)
+    await PlaylistAPI.editPlaylist(id, name, description)
+    if (name) await dispatch(updateTitle(name));
+    if (description) await dispatch(updateDescription(description));
 }
 export const getPlaylistThunk = (id) => async (dispatch) =>{
     let response = await PlaylistAPI.getPlaylist(id); 
