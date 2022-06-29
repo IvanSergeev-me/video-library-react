@@ -4,12 +4,9 @@ import { withTheme } from "../HOC/withTheme";
 import styles from "./Load.module.css";
 import aside_styles from "./Aside.module.css";
 import form_styles from "./Form.module.css";
-import { useForm, Controller } from "react-hook-form";
+import { useForm} from "react-hook-form";
 import { addVideoThunk, createCategoryThunk, getCategoriesThunk } from "../../Redux/load-reducer";
 import { useDispatch, useSelector } from "react-redux";
-import Select from 'react-select';
-import { customStyles, options } from "./Options";
-import { getStylesSelect} from "../../Assets/SelectHelper/SelectHelper";
 
 const Load = (props) =>{
 
@@ -59,13 +56,13 @@ const Load = (props) =>{
                 </div>
                 <div className={aside_styles.aside__add_category_form}> 
                     <h2 className={getTextClass(theme, aside_styles, "aside_top__header")}>Создайте плейлист</h2> 
-                    <AddCategoryForm onAsideSubmit={onAsideSubmit} theme={theme}/>
+                    <AddCategoryForm onAsideSubmit={onAsideSubmit} theme={theme} />
                 </div>
             </aside>
             <div className={styles.load_section__add_container}>
                 <h2 className={getTextClass(theme, styles, "add_container__header")}>Добавьте ваше видео</h2>
                 <div className={styles.add_container__form}>
-                    <AddVideoForm onVideoSubmit={onVideoSubmit} theme={theme}/>
+                    <AddVideoForm onVideoSubmit={onVideoSubmit} theme={theme} selectedCategory={selectedCategory}/>
                 </div>
             </div>
         </section>
@@ -86,9 +83,14 @@ const Category = (props) =>{
 
 let AddCategoryForm = (props) =>{
     // eslint-disable-next-line 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit,reset, watch,  formState: { errors } } = useForm();
+    let onSubmit = (data) =>{ 
+        props.onAsideSubmit(data);
+        reset();  
+    }
     return(
-        <form onSubmit={handleSubmit(props.onAsideSubmit)} className={form_styles.category_form__container}>
+        <form onSubmit={handleSubmit(onSubmit)} className={form_styles.category_form__container}>
+            
             {errors.new_category_name && <span className={getTextClass(props.theme, form_styles, "error_label")}>Это поле обязательно</span>}
             <div className={form_styles.category_form__fields}>
                 <input className={getSectionClass(props.theme, form_styles, "category_form__input")} placeholder="Название категории..." {...register("new_category_name", { required: true })} />
@@ -100,14 +102,19 @@ let AddCategoryForm = (props) =>{
 }
 let AddVideoForm = (props) =>{
     // eslint-disable-next-line 
-    const { register, control, handleSubmit, watch, formState: { errors } } = useForm({defaultValues: {
-        priority: 0
-      }});
-    let selectStyles = getStylesSelect(props.theme, customStyles);
-    
+    const { register, control, handleSubmit,setError,clearErrors, watch, reset, formState: { errors } } = useForm();
+    let onSubmit = (data) =>{
+            props.onVideoSubmit(data);
+            reset();
+    }
+    let checkErrors = () =>{
+        if(!props.selectedCategory) setError("categoryNotSelected");
+        else clearErrors("categoryNotSelected");
+    }
     return(
-        <form onSubmit={handleSubmit(props.onVideoSubmit)} className={form_styles.video_form__container}>
+        <form onSubmit={handleSubmit(onSubmit)} className={form_styles.video_form__container}>
             <div className={form_styles.video_form__fields}>
+            {errors.categoryNotSelected && <span className={getTextClass(props.theme, form_styles, "error_label")}>Укажите плейлист для загрузки</span>}
             {errors.name && <span className={getTextClass(props.theme, form_styles, "error_label")}>Это поле обязательно</span>}
                 <input className={getSectionClass(props.theme, form_styles, "video_form__input")} 
                     placeholder="Название видео..." {...register("name", { required: true })} />
@@ -121,7 +128,7 @@ let AddVideoForm = (props) =>{
                 <textarea className={getSectionClass(props.theme, form_styles, "video_form__textarea")} 
                     {...register("description", { required: false })} placeholder="Описание (необязательно)..."/>
             </div>
-            <button className={getButtonClass(props.theme, form_styles, "video_form__button")} type="submit">Добавить</button>
+            <button onClick={checkErrors} className={getButtonClass(props.theme, form_styles, "video_form__button")} type="submit">Добавить</button>
         </form>
     )
 }

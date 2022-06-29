@@ -26,22 +26,21 @@ let initialState = {
             },
         ]
     },
-    
+    isEmpty:true
 
 };
 const playlistReducer = (state = initialState, action) => {
     
     switch (action.type) {
         case SET_PLAYLIST:
-            return {...state, playlist:action.playlist}
+            return {...state, playlist:action.playlist, isEmpty:false}
         case UPDATE_DESCRIPTION:    
             return {...state,...state.playlist.description = action.description};
         case UPDATE_TITLE:    
-            return {...state,...state.playlist.name = action.title};
+            return {...state, ...state.playlist.name = action.title};
         case DELETE_PLAYLIST:    
-            return {...state,...state.playlist.videos = []};
+            return {...state,playlist:initialState.playlist, isEmpty:true};
         case DELETE_DESCRIPTION:
-
             return {...state, ...state.playlist.description = "Нет описания."}
         default: return state;
     };
@@ -55,7 +54,7 @@ export const setPlaylist = (playlist) => ({type:SET_PLAYLIST, playlist});
 
 export const  deletePlaylistThunk = (id) => async (dispatch) =>{  
     await PlaylistAPI.deletePlaylist(id);
-    dispatch(setPlaylist(initialState));
+    dispatch(deletePlaylist());
 }
 export const getPlaylistThunk = (id) => async (dispatch) =>{
     let response = await PlaylistAPI.getPlaylist(id); 

@@ -13,7 +13,6 @@ export const isVideosEmpty = (videos) =>{
     if (shallowEqual(videos[0],initialVideosArr)) {return true};
     return false;
     }
-
 let shallowEqual = (object1, object2) =>{
     const keys1 = Object.keys(object1);
     const keys2 = Object.keys(object2);

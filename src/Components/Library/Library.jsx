@@ -3,20 +3,23 @@ import { useSelector, useDispatch } from "react-redux";
 import { getSectionClass, getTextClass } from "../../Assets/classHelper/classHelper";
 import { getPlaylistsThunk } from "../../Redux/library-reducer";
 import Greetings from "../Greetings/Greetings";
+import { withTheme } from "../HOC/withTheme";
 import CategoryRow from "./CategoryRow/CategoryRow";
 import styles from "./Library.module.css";
-
 
 const Library = (props) =>{
     const dispatch = useDispatch();
     let library = useSelector(state => state.library.playlists);
-    let theme = useSelector(state => state.appInit.theme);
     let isLibraryEmpty = useSelector(state => state.library.isEmpty);
     useEffect(() => {
         dispatch(getPlaylistsThunk());
     // eslint-disable-next-line
     },[]);
-    if(isLibraryEmpty) return <Greetings />;
+
+    let theme = props.theme;
+
+    if(isLibraryEmpty || library.length === 0) return <Greetings />;
+
     let playlists = library.map(categoryRow => <CategoryRow 
         key={categoryRow.id} 
         id={categoryRow.id} 
@@ -36,4 +39,4 @@ const Library = (props) =>{
         </section>
     )
 }
-export default Library;
+export default withTheme(Library);

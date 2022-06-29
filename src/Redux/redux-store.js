@@ -1,4 +1,5 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
+import { composeWithDevTools } from 'redux-devtools-extension';
 import appReducer from "./app-reducer";
 import libraryReducer from "./library-reducer";
 import thunkMiddleware from 'redux-thunk';
@@ -12,6 +13,6 @@ let reducers = combineReducers({
     playlist:playlistReducer
 
 });
-let store = createStore(reducers, applyMiddleware(thunkMiddleware));
+let store = createStore(reducers, composeWithDevTools(applyMiddleware(thunkMiddleware)));
 
 export default store;

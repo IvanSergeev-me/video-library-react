@@ -1,15 +1,15 @@
 import React from "react";
 import styles from './Greetings.module.css';
-import { useSelector } from "react-redux";
 import Carousel from 'react-spring-3d-carousel';
 import { config } from "react-spring";
 import {slides} from "./slides.js";
 import {getButtonClass, getSectionClass, getTextClass} from "../../Assets/classHelper/classHelper";
 import { NavLink } from "react-router-dom";
+import { withTheme } from "../HOC/withTheme";
 
 const Greetings = (props) =>{
 
-    let theme = useSelector(state => state.appInit.theme);
+    let theme = props.theme;
     
     let greetingsClass = getSectionClass(theme, styles);
     let buttonColorClass = getButtonClass(theme, styles);
@@ -29,4 +29,4 @@ const Greetings = (props) =>{
         </section>
     )
 }
-export default Greetings;
+export default withTheme(Greetings);

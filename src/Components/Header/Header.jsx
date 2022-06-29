@@ -2,19 +2,20 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import styles from './Header.module.css';
 import classNames from "classnames/bind";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import Select from 'react-select'
 import { setTheme } from "../../Redux/app-reducer";
 import { options, customStyles} from "./Options";
 import { getButtonClass, getTextClass } from "../../Assets/classHelper/classHelper";
 import { getStylesSelect } from "../../Assets/SelectHelper/SelectHelper";
+import { withTheme } from "../HOC/withTheme";
 
 let cx = classNames.bind(styles);
 
 const Header = (props) =>{
     const dispatch = useDispatch();
 
-    let theme = useSelector(state => state.appInit.theme);
+    let theme = props.theme;
     let headerClass = cx({
         header: true,
         default_theme:theme==="default"?true:false,
@@ -51,4 +52,4 @@ const Header = (props) =>{
         </header>
     )
 }
-export default Header;
+export default withTheme(Header);
