@@ -30,3 +30,13 @@ export const getSectionClass = (theme,styles,propName) =>{
     if(propName) classNamesObject[propName] = true;
     return cx(classNamesObject);
 }
+export const getElementClass = (theme,styles,propName) =>{
+    let cx = classNames.bind(styles);
+    let classNamesObject = {
+        element:true,
+        default_element_theme:theme==="default"?true:false,
+        light_element_theme:theme==="light"?true:false
+    }
+    if(propName) classNamesObject[propName] = true;
+    return cx(classNamesObject);
+}

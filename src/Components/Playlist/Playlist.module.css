@@ -3,6 +3,7 @@
     font-family:Verdana, Geneva, Tahoma, sans-serif!important;
 }
 .edit_field{
+    
     font-family:Verdana, Geneva, Tahoma, sans-serif!important;
     resize:both;
     font-size: 1.2em;
@@ -26,6 +27,7 @@
     align-items: center;
 }
 .heading__icon{
+    
     margin-left: 1em;
     cursor: pointer;
     width: 2em;
@@ -56,7 +58,12 @@
     margin: 0 1em 1em 0;
 }
 .buttonColor_default{
+   
     background-color: #c95667;
+}
+.buttonColor_default img{
+    -webkit-filter:  invert(1);
+    filter: invert(1);
 }
 .buttonColor_light{
     background-color: white;

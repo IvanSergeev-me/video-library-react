@@ -1,4 +1,4 @@
-import { PlaylistAPI } from "../Api/API";
+import { PlaylistAPI, VideoAPI } from "../Api/API";
 
 const UPDATE_TITLE = "playlist-reducer/UPDATE_TITLE";
 const DELETE_PLAYLIST = "playlist-reducer/DELETE_PLAYLIST";
@@ -65,15 +65,19 @@ export const  deletePlaylistThunk = (id) => async (dispatch) =>{
     dispatch(deletePlaylist());
 }
 export const updatePlaylist = (id, name, description) => async (dispatch) =>{
-    console.log(id, name, description)
     await PlaylistAPI.editPlaylist(id, name, description)
     if (name) await dispatch(updateTitle(name));
     if (description) await dispatch(updateDescription(description));
 }
+export const updateVideo = (id, name, description) => async (dispatch) =>{
+    await VideoAPI.editVideo(id, name, description)
+}
 export const getPlaylistThunk = (id) => async (dispatch) =>{
     let response = await PlaylistAPI.getPlaylist(id); 
     dispatch(setPlaylist(response.data))
-    
+}
+export const updateVideoPriority = (id, newPriority) => async (dispatch) =>{
+    await VideoAPI.changePriority(id, newPriority)
 }
 
 export default playlistReducer;

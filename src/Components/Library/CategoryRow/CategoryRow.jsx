@@ -15,6 +15,7 @@ const CategoryRow = (props) =>{
     id = {video.id}
     link = {video.link}
     name = {video.name}
+    canEdit={false}
     description = {video.description}
     priority = {video.priority}
     addDate = {video.add_date}

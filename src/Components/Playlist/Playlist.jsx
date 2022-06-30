@@ -6,14 +6,13 @@ import { getButtonClass, getSectionClass, getTextClass } from "../../Assets/clas
 import VideoCard from "../Library/VideoCard/VideoCard";
 import pencil from "../../Assets/Images/pencil.png";
 import cross from "../../Assets/Images/close.png";
-import { deleteDescription, getPlaylistThunk, deletePlaylistThunk, deletePlaylist, updatePlaylist } from "../../Redux/playlist-reducer";
+import { deleteDescription, getPlaylistThunk, deletePlaylistThunk, deletePlaylist, updatePlaylist, updateVideoPriority } from "../../Redux/playlist-reducer";
 import { withTheme } from "../HOC/withTheme";
 import { getPlaylistsThunk } from "../../Redux/library-reducer";
 
 const Playlist = (props) =>{
     let params = useParams();
     let navigate = useNavigate();
-    //let isEmpty = useSelector(state => state.playlist.isEmpty);
     let playlist = useSelector(state => state.playlist.playlist);
     let theme = props.theme;
     let dispatch = useDispatch();
@@ -28,11 +27,10 @@ const Playlist = (props) =>{
     
     //Mount
     useEffect(()=>{
-        console.log("effect")
         dispatch(getPlaylistThunk(params.id));
         setTitle(playlist.name);
         setDescription(playlist.description);
-        setItems(playlist.videos.map(v => {v.priority = v.id; return v}))//Костыли
+        setItems(playlist.videos);
         // eslint-disable-next-line
     },[playlist.name, playlist.description]);
 
@@ -65,13 +63,16 @@ const Playlist = (props) =>{
         dispatch(getPlaylistsThunk());
         e.preventDefault();
     }
+
     let deleteThisDescription= (e) =>{
         dispatch(deleteDescription());
         e.preventDefault();
     }
+
     let onTitleChange = (e) =>{
         setTitle(e.currentTarget.value)
     }
+
     let onDescriptionChange = (e) =>{
         setDescription(e.currentTarget.value);
     }
@@ -96,9 +97,11 @@ const Playlist = (props) =>{
     const drop = (e, video) => {
         setItems(items.map((item)=>{
         if(item.id === video.id){
+            dispatch(updateVideoPriority(item.id, currentItem.priority));
             return {...item, priority:currentItem.priority}
         }
         if(item.id === currentItem.id){
+            dispatch(updateVideoPriority(item.id, video.priority));
             return{...item, priority:video.priority}
         }
         return item;
@@ -122,6 +125,7 @@ const Playlist = (props) =>{
         description = {video.description}
         priority = {video.priority}
         addDate = {video.add_date}
+        canEdit={true}
         theme={theme}
         
         />);

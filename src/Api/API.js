@@ -58,6 +58,13 @@ export const VideoAPI = {
             description:description
         }
         return instance.post(`editVideo.php`,toEdit);
+    },
+    changePriority(id, newPriority){
+        let toEdit = {
+            id: id,
+            priority: newPriority,
+        }
+        return instance.post(`changePriorityVideo.php`,toEdit);
     }
 
 }
