@@ -12,15 +12,16 @@
     color: black;
     padding: 5px;
     background: none;
+    margin-top: 10px;
 }
 .default_theme{
     color: white;
     outline-color: #c95667 ;
-    border: 2px solid #c95667;
+    border-bottom: 2px solid #c95667;
 }
 .light_theme{
     outline-color: #350134 ;
-    border: 2px solid #350134;
+    border-bottom: 2px solid #350134;
 }
 .playlist_section__heading{
     display: flex;
@@ -70,18 +71,22 @@
 }
 .playlist_section__description{
     margin-top: 1em;
+    display: flex;
+    flex-direction: column;
 }
 .description__text{
+    margin-top: 10px;
     font-family: "Roboto", sans-serif;
     font-size: 1em;
 }
 .description__buttons{
-   display: flex;
+    margin-top: 10px;
+    display: flex;
 }
 .description__buttons button{
     margin-left: 0;
     margin-right: 1em;
-    margin-top: 10px;
+    
  }
 .date_text{
     color: #cccccc;

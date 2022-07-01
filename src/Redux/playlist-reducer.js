@@ -5,6 +5,7 @@ const DELETE_PLAYLIST = "playlist-reducer/DELETE_PLAYLIST";
 const DELETE_DESCRIPTION = "playlist-reducer/DELETE_DESCRIPTION";
 const UPDATE_DESCRIPTION = "playlist-reducer/UPDATE_DESCRIPTION";
 const SET_PLAYLIST = "playlist-reducer/SET_PLAYLIST";
+const DELETE_VIDEO = "playlist-reducer/DELETE_VIDEO";
 
 let initialState = {
     //Страница конкретного плейлиста
@@ -48,8 +49,18 @@ const playlistReducer = (state = initialState, action) => {
         }           
         case DELETE_PLAYLIST:    
             return {...state,playlist:initialState.playlist, isEmpty:true};
-        case DELETE_DESCRIPTION:
-            return {...state, ...state.playlist.description = "Нет описания."}
+        case DELETE_DESCRIPTION:{
+            let newPlaylist = state.playlist;
+            newPlaylist.description = "";
+            return {...state, playlist:newPlaylist}
+        } 
+        case DELETE_VIDEO:{
+            let newPlaylist = state.playlist;
+            let newVideos = newPlaylist.videos.filter(v=>v.id!==action.id)
+            newPlaylist.videos = newVideos;
+            console.log(newPlaylist.videos);
+            return {...state, playlist:newPlaylist}
+        }
         default: return state;
     };
 };
@@ -59,10 +70,15 @@ export const updateDescription = (description) => ({type:UPDATE_DESCRIPTION, des
 export const deletePlaylist = () => ({type:DELETE_PLAYLIST});
 export const deleteDescription = () => ({type:DELETE_DESCRIPTION});
 export const setPlaylist = (playlist) => ({type:SET_PLAYLIST, playlist});
+export const deleteVideo = (id) => ({type:DELETE_VIDEO, id})
 
 export const  deletePlaylistThunk = (id) => async (dispatch) =>{  
     await PlaylistAPI.deletePlaylist(id);
     dispatch(deletePlaylist());
+}
+export const  deleteVideoThunk = (id) => async (dispatch) =>{  
+    await VideoAPI.deleteVideo(id);
+    dispatch(deleteVideo(id));
 }
 export const updatePlaylist = (id, name, description) => async (dispatch) =>{
     await PlaylistAPI.editPlaylist(id, name, description)

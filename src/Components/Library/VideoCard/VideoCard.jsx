@@ -1,7 +1,7 @@
 import React, { useState} from "react";
 import { useDispatch } from "react-redux";
 import { getElementClass, getTextClass } from "../../../Assets/classHelper/classHelper";
-import { updateVideo } from "../../../Redux/playlist-reducer";
+import { deleteVideoThunk, updateVideo } from "../../../Redux/playlist-reducer";
 import pencil from "../../../Assets/Images/pencil.png";
 import styles from "../Library.module.css";
 
@@ -58,6 +58,10 @@ const VideoCard = (props) =>{
         setName(e.currentTarget.value);
     }
 
+    let onDelete = () =>{
+        dispatch(deleteVideoThunk(props.id));
+    }
+
     return(
         <div draggable={props.draggable} 
             onDragStart={props.onDragStart}
@@ -70,18 +74,22 @@ const VideoCard = (props) =>{
                 <img className={styles.video__preview} src={picture} alt="video_preview" />
                 {mouseOnVideo?
                 <div className={styles.video__description}>
-                    <p className={styles.description__date}>Добавлен {props.addDate}</p>
-                    {descrEditMode?<textarea 
-                        className={styles.description__textarea} 
-                        autoFocus={true} 
-                        value={description}
-                        onChange={onDescriptionChange}
-                        placeholder={"Введите описание"} 
-                        onBlur={onDescriptionEdit} />:
-                    <p onDoubleClick={onDescriptionEdit} className={styles.description__text}>
-                        {description?description:
-                        <button onClick={onDescriptionEdit} className={styles.description__button}>Добавить описание</button>}
-                    </p>}
+                    {canEdit?<div className={styles.description__top_panel}><span onClick={onDelete}>Удалить</span></div>:null}
+                    <div>
+                        <p className={styles.description__date}>Добавлен {props.addDate}</p>
+                        {descrEditMode?<textarea 
+                            className={styles.description__textarea} 
+                            autoFocus={true} 
+                            value={description}
+                            onChange={onDescriptionChange}
+                            placeholder={"Введите описание"} 
+                            onBlur={onDescriptionEdit} />:
+                        <p onDoubleClick={onDescriptionEdit} className={styles.description__text}>
+                            {description?description:
+                            <button onClick={onDescriptionEdit} className={styles.description__button}>Добавить описание</button>}
+                        </p>}
+                    </div>
+                    
                 </div>:null}
                 
             </div>

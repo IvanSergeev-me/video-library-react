@@ -129,6 +129,24 @@
     color: white;
     font-family: 'Roboto', sans-serif;
 }
+.description__top_panel{
+    position: absolute;
+    top: 10px;
+    right: 0;
+    
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    color: white;
+    font-size: 1em;
+    font-family: 'Roboto', sans-serif;
+}
+.description__top_panel span{
+    cursor: pointer;
+}
+.description__top_panel span:hover{
+    color: #cccccc;
+}
 .description__button{
     background: 0;
     color: white;

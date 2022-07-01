@@ -65,6 +65,9 @@ export const VideoAPI = {
             priority: newPriority,
         }
         return instance.post(`changePriorityVideo.php`,toEdit);
-    }
+    },
+    deleteVideo(id){
+        return instance.post(`removeVideo.php`, {id})
+    },
 
 }

@@ -4,15 +4,21 @@ import { withTheme } from "../HOC/withTheme";
 import styles from "./Load.module.css";
 import aside_styles from "./Aside.module.css";
 import form_styles from "./Form.module.css";
+import popup_styles from "./Popup.module.css";
 import { useForm} from "react-hook-form";
 import { addVideoThunk, createCategoryThunk, getCategoriesThunk } from "../../Redux/load-reducer";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 const Load = (props) =>{
 
     let dispatch = useDispatch();
     let creator_id = 1; //hardcoded value
     let [selectedCategory, selectCategory] = useState(null);
+    const [modalOpen, setModalOpen] = useState(false);
+    const closeModal = () =>  setModalOpen(false);
 
     let categories = useSelector(state => state.load.categories);
 
@@ -30,6 +36,7 @@ const Load = (props) =>{
         let link = data.link;
         if(selectedCategory){
             dispatch(addVideoThunk(selectedCategory, name, description, link));
+            setModalOpen(true)
         }
         else{
             console.log("wrong")
@@ -40,9 +47,18 @@ const Load = (props) =>{
     }
 
     let theme = props.theme;
-    
+    const contentStyle = { padding: '0', border:"none" };
     return(
         <section className={styles.load_section}>
+             <Popup className={popup_styles.popupContent} modal closeOnDocumentClick onClose={closeModal} open={modalOpen} position="right center"
+             {...{ contentStyle}}>
+                <div className={getSectionClass(theme, popup_styles)}>
+                    <div className={popup_styles.top_panel}><span onClick={closeModal} className={getTextClass(theme, popup_styles, "section__close")}>Закрыть</span></div>
+                    <div className={getTextClass(theme, popup_styles, "section__header")}>Видео добавлено!</div>
+                    <div className={getTextClass(theme, popup_styles, "section__text")}>Вы можете посмотреть его в Вашей библиотеке</div>
+                    <NavLink className={getButtonClass(theme,popup_styles)} to={"/"}>Перейти</NavLink>
+                </div>     
+            </Popup>
             <aside className={getSectionClass(theme, aside_styles, "load_section__aside")}>
                 <div className={aside_styles.aside_top}>
                     <h3 className={getTextClass(theme, aside_styles, "aside_top__header")}>Ваши плейлисты</h3>
@@ -129,6 +145,7 @@ let AddVideoForm = (props) =>{
                     {...register("description", { required: false })} placeholder="Описание (необязательно)..."/>
             </div>
             <button onClick={checkErrors} className={getButtonClass(props.theme, form_styles, "video_form__button")} type="submit">Добавить</button>
+            
         </form>
     )
 }

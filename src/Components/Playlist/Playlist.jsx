@@ -6,14 +6,18 @@ import { getButtonClass, getSectionClass, getTextClass } from "../../Assets/clas
 import VideoCard from "../Library/VideoCard/VideoCard";
 import pencil from "../../Assets/Images/pencil.png";
 import cross from "../../Assets/Images/close.png";
-import { deleteDescription, getPlaylistThunk, deletePlaylistThunk, deletePlaylist, updatePlaylist, updateVideoPriority } from "../../Redux/playlist-reducer";
+import { getPlaylistThunk, deletePlaylistThunk, deletePlaylist, updatePlaylist, updateVideoPriority, deleteDescription } from "../../Redux/playlist-reducer";
 import { withTheme } from "../HOC/withTheme";
 import { getPlaylistsThunk } from "../../Redux/library-reducer";
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+import popup_styles from "./Popup.module.css";
 
 const Playlist = (props) =>{
     let params = useParams();
     let navigate = useNavigate();
     let playlist = useSelector(state => state.playlist.playlist);
+    let videos_ = useSelector(state => state.playlist.playlist.videos);
     let theme = props.theme;
     let dispatch = useDispatch();
     let [titleEditMode, toggleTitleEditMode] = useState(false);
@@ -22,17 +26,18 @@ const Playlist = (props) =>{
     let [descrEditMode, toggleDescrEditMode] = useState(false);
     let [description, setDescription] = useState(playlist.description);
 
-    let [items, setItems] = useState(playlist.videos);
+    let [items, setItems] = useState(videos_);
     let [currentItem, setCurrentItem] = useState(null);
     
     //Mount
-    useEffect(()=>{
-        dispatch(getPlaylistThunk(params.id));
+    useEffect(()=>{   
+        console.log("effect") 
         setTitle(playlist.name);
         setDescription(playlist.description);
-        setItems(playlist.videos);
+        setItems(videos_);
+        dispatch(getPlaylistThunk(params.id));
         // eslint-disable-next-line
-    },[playlist.name, playlist.description]);
+    },[playlist.name, playlist.description ]);
 
     //Unmount
     useEffect(() => {
@@ -41,6 +46,12 @@ const Playlist = (props) =>{
         }
         // eslint-disable-next-line
       }, []);
+      
+    //Update
+    useEffect(() => {
+        setItems(videos_);
+        // eslint-disable-next-line
+      }, [videos_]);
 
     let toggleEditTitle = (param) =>{
         if (param === "title"){
@@ -150,11 +161,16 @@ const Playlist = (props) =>{
                     className={getButtonClass(theme,styles, "heading__icon")}>
                         <img src={pencil} alt="edit" />
                 </button>
-                <button 
-                    onClick={deleteThisPlaylist} 
+                <Popup position="right center" trigger={<button 
                     className={getButtonClass(theme,styles, "heading__icon")}>
                         <img src={cross} alt="delete" />
-                </button>
+                </button>}>
+                    <div className={getSectionClass(theme, popup_styles)}>
+                        <div className={getTextClass(theme, popup_styles, "popup_text")}>Вы уверены?</div>
+                        <div className={getButtonClass(theme, popup_styles)} onClick={deleteThisPlaylist} >Да</div>
+                    </div>
+                </Popup>
+                
             </div>
             <div className={styles.playlist_section__description}>
             <span className={styles.date_text}>создан {playlist.creation_date}</span>
@@ -163,11 +179,12 @@ const Playlist = (props) =>{
                     className={getSectionClass(theme,styles,"edit_field")} 
                     autoFocus={true} 
                     value = {description} 
+                    placeholder={"Введите описание"}
                     onBlur={(e)=>{toggleEditTitle("descr"); e.preventDefault();}} 
                     onChange={onDescriptionChange}/>:
                     <p 
                         onDoubleClick={(e)=>{toggleEditTitle("descr"); e.preventDefault();}} 
-                        className={getTextClass(theme, styles, "description__text")}>{description}
+                        className={getTextClass(theme, styles, "description__text")}>{description?description:"Добавьте описание плейлиста"}
                     </p>}
                 <div className={styles.description__buttons}>
                     <button 
