@@ -1,0 +1,23 @@
+.result_section{
+    padding: 0 1em 1em 1em;
+}
+.result_section__videos{
+    margin-top: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+.result_section__videos div{
+    margin: 0 1em 1em 0;
+}
+.result_section__heading{
+    font-size: 1.5em;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 600;
+}
+.color_default{
+    color:white;
+}
+.color_light{
+    color:black;
+}

@@ -5,12 +5,14 @@ import libraryReducer from "./library-reducer";
 import thunkMiddleware from 'redux-thunk';
 import playlistReducer from "./playlist-reducer";
 import loadReducer from "./load-reducer";
+import searchReducer from "./search-reducer";
 
 let reducers = combineReducers({
     load:loadReducer,
     appInit: appReducer,
     library:libraryReducer,
-    playlist:playlistReducer
+    playlist:playlistReducer,
+    search:searchReducer
 
 });
 let store = createStore(reducers, composeWithDevTools(applyMiddleware(thunkMiddleware)));

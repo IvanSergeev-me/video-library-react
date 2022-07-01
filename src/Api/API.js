@@ -69,5 +69,9 @@ export const VideoAPI = {
     deleteVideo(id){
         return instance.post(`removeVideo.php`, {id})
     },
-
+}
+export const SearchAPI = {
+    getResult(query){
+        return instance.get(`searchVideos.php?query=${query}`);
+    },
 }

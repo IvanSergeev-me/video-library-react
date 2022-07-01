@@ -48,8 +48,8 @@ height: var(--hex-parent-height);
     align-items: center;
 }
 .header__search{
+    height: 100%;
     user-select: none;
-    font-weight: 600;
     font-size: 1em;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     flex:1;

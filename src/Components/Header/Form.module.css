@@ -1,0 +1,30 @@
+.form{
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+}
+.form__input{
+    font-size: 1em;
+    font-family: "Roboto", sans-serif;
+    padding: 0 10px;
+}
+.form__button{
+    text-align: center;
+    padding: 10px;
+}
+.default_element_theme{
+    color: white;
+    background-color: #3e3f56;
+    border-bottom: 2px solid #c95667;
+}
+.light_element_theme{
+    border-bottom: 2px solid #350134;
+}
+.buttonColor_default{
+    color: white;
+    background-color:#c95667;
+}
+.buttonColor_light{
+    color: white;
+    background-color:#350134;
+}

@@ -10,6 +10,7 @@ import Header from './Components/Header/Header';
 import Playlist from './Components/Playlist/Playlist';
 import styles from './App.module.css';
 import { getSectionClass } from './Assets/classHelper/classHelper';
+import SearchResult from './Components/SearchResult/SearchResult';
 
 const App = (props) =>{
   //const items = useSelector((state) => state.appInit.test);
@@ -22,6 +23,7 @@ const App = (props) =>{
           <Route path="/" element={<Library />} />
           <Route path="load" element={<Load />} />
           <Route path="playlist/:id" element={<Playlist />} />
+          <Route path="search" element={<SearchResult />} />
         </Routes>
         
       </main>
