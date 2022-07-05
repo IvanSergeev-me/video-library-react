@@ -86,7 +86,7 @@ const VideoCard = (props) =>{
                             onBlur={onDescriptionEdit} />:
                         <p onDoubleClick={onDescriptionEdit} className={styles.description__text}>
                             {description?description:
-                            <button onClick={onDescriptionEdit} className={styles.description__button}>Добавить описание</button>}
+                            canEdit?<button onClick={onDescriptionEdit} className={styles.description__button}>Добавить описание</button>:null}
                         </p>}
                     </div>
                     

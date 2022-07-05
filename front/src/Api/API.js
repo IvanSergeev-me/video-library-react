@@ -10,16 +10,16 @@ let headers = {
 }
 export const PlaylistAPI = {
     getPlaylists(creatorId){
-        return instance.get(`getPlaylists.php?creator_id=${creatorId}`);
+        return instance.get(`getPlaylists?creator_id=${creatorId}`);
     },
     getPlaylist(id){
-        return instance.get(`getPlaylist.php?id=${id}`)
+        return instance.get(`getPlaylist?id=${id}`)
     },
     deletePlaylist(id){
-        return instance.post(`removePlaylist.php`, {id})
+        return instance.post(`removePlaylist`, {id})
     },
     getShortPlaylists(creatorId){
-        return instance.get(`getPlaylists.php?creator_id=${creatorId}&short=1`);
+        return instance.get(`getPlaylists?creator_id=${creatorId}&short=1`);
     },
     createPlaylist(creator_id, name){
         let playlist = {
@@ -27,7 +27,7 @@ export const PlaylistAPI = {
             name: name,
             description: "",
         }
-        return instance.post(`addPlaylist.php`, playlist, headers);
+        return instance.post(`addPlaylist`, playlist, headers);
     },
     editPlaylist(id, name, description){
         let toEdit = {
@@ -35,10 +35,10 @@ export const PlaylistAPI = {
             name:name,
             description:description
         }
-        return instance.post(`editPlaylist.php`,toEdit);
+        return instance.post(`editPlaylist`,toEdit);
     },
     changePriority(priority){
-        return instance.post(`changePriorityPlaylist.php`, priority)
+        return instance.post(`changePriorityPlaylist`, priority)
     },
 };
 export const VideoAPI = {
@@ -49,7 +49,7 @@ export const VideoAPI = {
             description:description,
             link:link
         }
-        return instance.post(`addVideo.php`, video);
+        return instance.post(`addVideo`, video);
     },
     editVideo(id, name, description){
         let toEdit = {
@@ -57,21 +57,21 @@ export const VideoAPI = {
             name:name,
             description:description
         }
-        return instance.post(`editVideo.php`,toEdit);
+        return instance.post(`editVideo`,toEdit);
     },
     changePriority(id, newPriority){
         let toEdit = {
             id: id,
             priority: newPriority,
         }
-        return instance.post(`changePriorityVideo.php`,toEdit);
+        return instance.post(`changePriorityVideo`,toEdit);
     },
     deleteVideo(id){
-        return instance.post(`removeVideo.php`, {id})
+        return instance.post(`removeVideo`, {id})
     },
 }
 export const SearchAPI = {
     getResult(query){
-        return instance.get(`searchVideos.php?query=${query}`);
+        return instance.get(`searchVideos?query=${query}`);
     },
 }

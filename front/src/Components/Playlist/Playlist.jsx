@@ -31,7 +31,6 @@ const Playlist = (props) =>{
     
     //Mount
     useEffect(()=>{   
-        console.log("effect") 
         setTitle(playlist.name);
         setDescription(playlist.description);
         setItems(videos_);
@@ -46,7 +45,7 @@ const Playlist = (props) =>{
         }
         // eslint-disable-next-line
       }, []);
-      
+
     //Update
     useEffect(() => {
         setItems(videos_);
@@ -93,15 +92,18 @@ const Playlist = (props) =>{
     }
 
     const dragLeave = (e, position) => {
+        e.target.style.boxShadow = "none";
         e.target.style.background = "";
     }
 
     const dragOver = (e) =>{
-        e.target.style.background = "grey";
+       
+        e.target.style.boxShadow = "10px 10px 10px 10px rgba(0, 0, 0, 0.55)";
         e.preventDefault();
     }
 
     const dragEnd = (e) =>{
+        e.target.style.boxShadow = "none";
         e.target.style.background = "";
     }
 
@@ -118,6 +120,7 @@ const Playlist = (props) =>{
         return item;
         }))
         e.target.style.background = "";
+        e.target.style.boxShadow = "none";
         e.preventDefault();
     };
 
