@@ -15,9 +15,6 @@
     display: flex;
     flex-direction: column;
 }
-.aside__add_category_form{
-
-}
 .category_container{
     margin-top: 1em;
     cursor: pointer;
@@ -30,10 +27,10 @@
     font-size: 1em;
     font-family: "Roboto", sans-serif;
 }
-.default_theme{
+.section_default{
     border-color: #c95667;
 }
-.light_theme{
+.section_light{
     border-color: #350134;
 }
 .color_default{

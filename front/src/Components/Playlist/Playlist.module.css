@@ -14,12 +14,12 @@
     background: none;
     margin-top: 10px;
 }
-.default_theme{
+.edit_field_default{
     color: white;
     outline-color: #c95667 ;
     border-bottom: 2px solid #c95667;
 }
-.light_theme{
+.edit_field_light{
     outline-color: #350134 ;
     border-bottom: 2px solid #350134;
 }
@@ -58,11 +58,11 @@
 .playlist_section__videos div{
     margin: 0 1em 1em 0;
 }
-.buttonColor_default{
+.button_default{
    
     background-color: #c95667;
 }
-.buttonColor_default img{
+.button_default img{
     -webkit-filter:  invert(1);
     filter: invert(1);
 }

@@ -2,10 +2,10 @@
     padding: 0 1em 1em 1em;
     height: 100%;
 }
-.default_theme{
+.section_default{
     background-color: #3e3f56;
 }
-.light_theme{
+.section_light{
     background-color: white;
 }
 .text{
@@ -70,6 +70,12 @@
     display: flex;
     justify-content: space-between;
 }
+.info__video_name_default{
+    color: white;
+}
+.info__video_name_light{
+    color: black;
+}
 .info__video_name_edit{
     font-family: 'Roboto', sans-serif;
     font-size: 1em;
@@ -84,16 +90,22 @@
     -webkit-filter:  invert(0.5);
     filter: invert(0.5);
 }
-.default_element_theme{
+.info__video_name_edit_pencil_default{
     -webkit-filter:  invert(1);
     filter: invert(1);
 }
-.light_element_theme{
+.info__video_name_edit_pencil_light{
     /*none*/
     --var:100;
 }
 .info__video_link{
     font-size: 1em;
+}
+.info__video_link_default{
+    color:white;
+}
+.info__video_link_light{
+    color: black;
 }
 .info__video_link:hover{
     color: #cccccc;

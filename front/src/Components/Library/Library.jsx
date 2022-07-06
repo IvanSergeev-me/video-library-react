@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getSectionClass, getTextClass } from "../../Assets/classHelper/classHelper";
+import { getClass } from "../../Assets/classHelper/classHelper";
 import { getPlaylistsThunk } from "../../Redux/library-reducer";
 import Greetings from "../Greetings/Greetings";
 import { withTheme } from "../HOC/withTheme";
@@ -28,8 +28,8 @@ const Library = (props) =>{
         priority = {categoryRow.priority}
         theme = {theme}
         videos={categoryRow.videos}/>);
-    let libraryClass = getSectionClass(theme, styles);
-    let headingClass = getTextClass(theme, styles, "heading");
+    let libraryClass = getClass(theme, styles, "section");
+    let headingClass = getClass(theme, styles, "heading","color");
     return(
         <section className={libraryClass}>
             <h1 className={headingClass}>Ваша библиотека</h1>

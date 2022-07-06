@@ -13,10 +13,10 @@ height: var(--hex-parent-height);
     padding: 1em;
     height: 80px;
 }
-.default_theme{
+.header_default{
     background-color: #3e3f56;
 }
-.light_theme{
+.header_light{
     background-color:white;
 }
 .button{

@@ -8,14 +8,14 @@
     width: 100%;
     overflow: hidden;
 }
-.default_theme{
+.section_default{
     box-sizing: border-box;
     background-color: #3e3f56;
     height: 100%;
     width: 100%;
     overflow: hidden;
 }
-.light_theme{
+.section_light{
     background-color: white;
     height: 100%;
     width: 100%;
@@ -32,11 +32,11 @@
     padding: 1em;
     text-align: center;
 }
-.buttonColor_default{
+.button_default{
     color: white;
     background-color:#c95667;
 }
-.buttonColor_light{
+.button_light{
     color: white;
     background-color:#350134;
 }

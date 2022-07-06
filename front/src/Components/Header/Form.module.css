@@ -12,12 +12,12 @@
     text-align: center;
     padding: 10px;
 }
-.default_element_theme{
+.form__input_default{
     color: white;
     background-color: #3e3f56;
     border-bottom: 2px solid #c95667;
 }
-.light_element_theme{
+.form__input_light{
     border-bottom: 2px solid #350134;
 }
 .form__button_default{

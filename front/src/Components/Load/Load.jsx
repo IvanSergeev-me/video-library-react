@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getSectionClass, getTextClass, getButtonClass } from "../../Assets/classHelper/classHelper";
+import {  getClass } from "../../Assets/classHelper/classHelper";
 import { withTheme } from "../HOC/withTheme";
 import styles from "./Load.module.css";
 import aside_styles from "./Aside.module.css";
@@ -52,16 +52,16 @@ const Load = (props) =>{
         <section className={styles.load_section}>
              <Popup className={popup_styles.popupContent} modal closeOnDocumentClick onClose={closeModal} open={modalOpen} position="right center"
              {...{ contentStyle}}>
-                <div className={getSectionClass(theme, popup_styles)}>
-                    <div className={popup_styles.top_panel}><span onClick={closeModal} className={getTextClass(theme, popup_styles, "section__close")}>Закрыть</span></div>
-                    <div className={getTextClass(theme, popup_styles, "section__header")}>Видео добавлено!</div>
-                    <div className={getTextClass(theme, popup_styles, "section__text")}>Вы можете посмотреть его в Вашей библиотеке</div>
-                    <NavLink className={getButtonClass(theme,popup_styles)} to={"/"}>Перейти</NavLink>
+                <div className={getClass(theme, popup_styles,"section")}>
+                    <div className={popup_styles.top_panel}><span onClick={closeModal} className={getClass(theme, popup_styles, "section__close","color")}>Закрыть</span></div>
+                    <div className={getClass(theme, popup_styles, "section__header","color")}>Видео добавлено!</div>
+                    <div className={getClass(theme, popup_styles, "section__text","color")}>Вы можете посмотреть его в Вашей библиотеке</div>
+                    <NavLink className={getClass(theme,popup_styles,"button")} to={"/"}>Перейти</NavLink>
                 </div>     
             </Popup>
-            <aside className={getSectionClass(theme, aside_styles, "load_section__aside")}>
+            <aside className={getClass(theme, aside_styles, "load_section__aside","section")}>
                 <div className={aside_styles.aside_top}>
-                    <h3 className={getTextClass(theme, aside_styles, "aside_top__header")}>Ваши плейлисты</h3>
+                    <h3 className={getClass(theme, aside_styles, "aside_top__header", "color")}>Ваши плейлисты</h3>
                     <div className={aside_styles.aside_top__categories}>
                         {categories.map(category => <Category 
                         selectedCategory={selectedCategory} 
@@ -71,12 +71,12 @@ const Load = (props) =>{
                     </div>
                 </div>
                 <div className={aside_styles.aside__add_category_form}> 
-                    <h2 className={getTextClass(theme, aside_styles, "aside_top__header")}>Создайте плейлист</h2> 
+                    <h2 className={getClass(theme, aside_styles, "aside_top__header","color")}>Создайте плейлист</h2> 
                     <AddCategoryForm onAsideSubmit={onAsideSubmit} theme={theme} />
                 </div>
             </aside>
             <div className={styles.load_section__add_container}>
-                <h2 className={getTextClass(theme, styles, "add_container__header")}>Добавьте ваше видео</h2>
+                <h2 className={getClass(theme, styles, "add_container__header","color")}>Добавьте ваше видео</h2>
                 <div className={styles.add_container__form}>
                     <AddVideoForm onVideoSubmit={onVideoSubmit} theme={theme} selectedCategory={selectedCategory}/>
                 </div>
@@ -90,8 +90,8 @@ const Category = (props) =>{
     }
     let isSelected = props.selectedCategory === props.id;
     return(
-        <div onClick={SelectThis} className={`${aside_styles.category_container} ${isSelected?aside_styles.selected_category:null} ${getSectionClass(props.theme, aside_styles)}`}>
-            <p className={getTextClass(props.theme, aside_styles, "category_text")}>{props.name}</p>
+        <div onClick={SelectThis} className={`${aside_styles.category_container} ${isSelected?aside_styles.selected_category:null} ${getClass(props.theme, aside_styles,"section")}`}>
+            <p className={getClass(props.theme, aside_styles, "category_text","color")}>{props.name}</p>
         </div>
     )
 }
@@ -107,10 +107,10 @@ let AddCategoryForm = (props) =>{
     return(
         <form onSubmit={handleSubmit(onSubmit)} className={form_styles.category_form__container}>
             
-            {errors.new_category_name && <span className={getTextClass(props.theme, form_styles, "error_label")}>Это поле обязательно</span>}
+            {errors.new_category_name && <span className={getClass(props.theme, form_styles, "error_label","color")}>Это поле обязательно</span>}
             <div className={form_styles.category_form__fields}>
-                <input className={getSectionClass(props.theme, form_styles, "category_form__input")} placeholder="Название категории..." {...register("new_category_name", { required: true })} />
-                <button className={getButtonClass(props.theme, form_styles, "category_form__button")} type="submit">Создать</button>
+                <input className={getClass(props.theme, form_styles, "category_form__input","section")} placeholder="Название категории..." {...register("new_category_name", { required: true })} />
+                <button className={getClass(props.theme, form_styles, "category_form__button","button")} type="submit">Создать</button>
             </div>
         </form>
     )
@@ -130,21 +130,21 @@ let AddVideoForm = (props) =>{
     return(
         <form onSubmit={handleSubmit(onSubmit)} className={form_styles.video_form__container}>
             <div className={form_styles.video_form__fields}>
-            {errors.categoryNotSelected && <span className={getTextClass(props.theme, form_styles, "error_label")}>Укажите плейлист для загрузки</span>}
-            {errors.name && <span className={getTextClass(props.theme, form_styles, "error_label")}>Это поле обязательно</span>}
-                <input className={getSectionClass(props.theme, form_styles, "video_form__input")} 
+            {errors.categoryNotSelected && <span className={getClass(props.theme, form_styles, "error_label","color")}>Укажите плейлист для загрузки</span>}
+            {errors.name && <span className={getClass(props.theme, form_styles, "error_label","color")}>Это поле обязательно</span>}
+                <input className={getClass(props.theme, form_styles, "video_form__input","section")} 
                     placeholder="Название видео..." {...register("name", { required: true })} />
             </div>
             <div className={form_styles.video_form__fields}>
-            {errors.link && <span className={getTextClass(props.theme, form_styles, "error_label")}>Это поле обязательно</span>}
-                <input className={getSectionClass(props.theme, form_styles, "video_form__input")} 
+            {errors.link && <span className={getClass(props.theme, form_styles, "error_label","color")}>Это поле обязательно</span>}
+                <input className={getClass(props.theme, form_styles, "video_form__input","section")} 
                     placeholder="Ссылка на видео..." {...register("link", { required: true })} />
             </div>
             <div className={form_styles.video_form__fields}>
-                <textarea className={getSectionClass(props.theme, form_styles, "video_form__textarea")} 
+                <textarea className={getClass(props.theme, form_styles, "video_form__textarea","section")} 
                     {...register("description", { required: false })} placeholder="Описание (необязательно)..."/>
             </div>
-            <button onClick={checkErrors} className={getButtonClass(props.theme, form_styles, "video_form__button")} type="submit">Добавить</button>
+            <button onClick={checkErrors} className={getClass(props.theme, form_styles, "video_form__button","button")} type="submit">Добавить</button>
             
         </form>
     )

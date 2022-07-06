@@ -9,7 +9,7 @@ import Load from './Components/Load/Load';
 import Header from './Components/Header/Header';
 import Playlist from './Components/Playlist/Playlist';
 import styles from './App.module.css';
-import { getSectionClass } from './Assets/classHelper/classHelper';
+import { getClass } from './Assets/classHelper/classHelper';
 import SearchResult from './Components/SearchResult/SearchResult';
 
 const App = (props) =>{
@@ -18,7 +18,7 @@ const App = (props) =>{
   return(
     <>
       <Header />
-      <main className={getSectionClass(theme, styles, "main_section")}>
+      <main className={getClass(theme, styles, "main_section")}>
         <Routes>
           <Route path="/" element={<Library />} />
           <Route path="load" element={<Load />} />

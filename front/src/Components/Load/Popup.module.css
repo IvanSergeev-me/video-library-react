@@ -35,20 +35,20 @@
 .color_default{
     color: white;
 }
-.default_theme{
+.section_default{
     background-color: #3e3f56;
 }
-.buttonColor_default{
+.button_default{
     background-color: #c95667;
     color: white;
 }
 .color_light{
     color: black;
 }
-.light_theme{
+.section_light{
     background-color: white;
 }
-.buttonColor_light{
+.button_light{
     background-color: #350134;
     color: white;
 }

@@ -6,7 +6,7 @@ import { useDispatch} from "react-redux";
 import Select from 'react-select'
 import { setTheme } from "../../Redux/app-reducer";
 import { options, customStyles} from "./Options";
-import {getClass, getElementClass, getSectionClass} from "../../Assets/classHelper/classHelper";
+import {getClass} from "../../Assets/classHelper/classHelper";
 import { getStylesSelect } from "../../Assets/SelectHelper/SelectHelper";
 import { withTheme } from "../HOC/withTheme";
 import { useForm} from "react-hook-form";
@@ -16,7 +16,7 @@ const Header = (props) =>{
     const dispatch = useDispatch();
     let navigate = useNavigate();
     let theme = props.theme;
-    let headerClass = getSectionClass(theme,styles,"header")
+    let headerClass = getClass(theme,styles,"header")
 
     let onSelectChange = (value) =>{
         let payload = value.value;
@@ -26,8 +26,10 @@ const Header = (props) =>{
     let stylesSelect = getStylesSelect(theme, customStyles);
 
     let onFormSubmit = (query) =>{
-        navigate("/search");
-        dispatch(getResultThunk(query.query));
+        if(query.query){
+            navigate("/search");
+            dispatch(getResultThunk(query.query));
+        }
     }
 
     return(
@@ -61,7 +63,7 @@ const SearchForm = (props) => {
     }
     return ( 
         <form className={form_styles.form} onSubmit={handleSubmit(onSubmit)}>
-            <input className={getElementClass(props.theme, form_styles, "form__input")} placeholder="Поиск по видео" {...register("query")} />
+            <input className={getClass(props.theme, form_styles, "form__input")} placeholder="Поиск по видео" {...register("query")} />
             <button to={"/search"} className={getClass(props.theme, form_styles, "form__button")} type="submit">Найти</button>
         </form>
      );

@@ -6,11 +6,11 @@
     max-width: 200px;
     text-align: center;
 }
-.buttonColor_default{
+.button_default{
     color: white;
     background-color:#c95667;
 }
-.buttonColor_light{
+.button_light{
     color: white;
     background-color:#350134;
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate  } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import styles from "./Playlist.module.css"
-import { getButtonClass, getSectionClass, getTextClass } from "../../Assets/classHelper/classHelper";
+import { getClass } from "../../Assets/classHelper/classHelper";
 import VideoCard from "../Library/VideoCard/VideoCard";
 import pencil from "../../Assets/Images/pencil.png";
 import cross from "../../Assets/Images/close.png";
@@ -150,7 +150,7 @@ const Playlist = (props) =>{
                 {titleEditMode?
                 <div>
                     <textarea 
-                        className={getSectionClass(theme,styles,"edit_field")} 
+                        className={getClass(theme,styles,"edit_field")} 
                         autoFocus={true} 
                         value = {title} 
                         onBlur={(e)=>{toggleEditTitle("title"); e.preventDefault();}} 
@@ -158,20 +158,20 @@ const Playlist = (props) =>{
                 </div>:
                 <h2 
                     onDoubleClick={(e)=>{toggleEditTitle("title"); e.preventDefault();}} 
-                    className={getTextClass(theme, styles, "heading__title")}>Ваш плейлист - {title}
+                    className={getClass(theme, styles, "heading__title","color")}>Ваш плейлист - {title}
                 </h2>}
                 <button 
                     onClick={(e)=>{toggleEditTitle("title"); e.preventDefault();}} 
-                    className={getButtonClass(theme,styles, "heading__icon")}>
+                    className={getClass(theme,styles, "heading__icon", "button")}>
                         <img src={pencil} alt="edit" />
                 </button>
                 <Popup position="right center" trigger={<button 
-                    className={getButtonClass(theme,styles, "heading__icon")}>
+                    className={getClass(theme,styles, "heading__icon","button")}>
                         <img src={cross} alt="delete" />
                 </button>}>
-                    <div className={getSectionClass(theme, popup_styles)}>
-                        <div className={getTextClass(theme, popup_styles, "popup_text")}>Вы уверены?</div>
-                        <div className={getButtonClass(theme, popup_styles)} onClick={deleteThisPlaylist} >Да</div>
+                    <div className={getClass(theme, popup_styles, "section")}>
+                        <div className={getClass(theme, popup_styles, "popup_text","color")}>Вы уверены?</div>
+                        <div className={getClass(theme, popup_styles,"button")} onClick={deleteThisPlaylist} >Да</div>
                     </div>
                 </Popup>
                 
@@ -180,7 +180,7 @@ const Playlist = (props) =>{
             <span className={styles.date_text}>создан {playlist.creation_date}</span>
                 {descrEditMode?
                 <textarea 
-                    className={getSectionClass(theme,styles,"edit_field")} 
+                    className={getClass(theme,styles,"edit_field")} 
                     autoFocus={true} 
                     value = {description} 
                     placeholder={"Введите описание"}
@@ -188,17 +188,17 @@ const Playlist = (props) =>{
                     onChange={onDescriptionChange}/>:
                     <p 
                         onDoubleClick={(e)=>{toggleEditTitle("descr"); e.preventDefault();}} 
-                        className={getTextClass(theme, styles, "description__text")}>{description?description:"Добавьте описание плейлиста"}
+                        className={getClass(theme, styles, "description__text","color")}>{description?description:"Добавьте описание плейлиста"}
                     </p>}
                 <div className={styles.description__buttons}>
                     <button 
                         onClick={(e)=>{toggleEditTitle("descr"); e.preventDefault();}} 
-                        className={getButtonClass(theme,styles, "heading__icon")}>
+                        className={getClass(theme,styles, "heading__icon","button")}>
                             <img src={pencil} alt="edit" />
                     </button>
                     <button 
                         onClick={deleteThisDescription} 
-                        className={getButtonClass(theme,styles, "heading__icon")}>
+                        className={getClass(theme,styles, "heading__icon","button")}>
                             <img src={cross} alt="delete" />
                     </button>
                 </div>

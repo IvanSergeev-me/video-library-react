@@ -1,6 +1,6 @@
 import React, { useState} from "react";
 import { useDispatch } from "react-redux";
-import { getElementClass, getTextClass } from "../../../Assets/classHelper/classHelper";
+import { getClass } from "../../../Assets/classHelper/classHelper";
 import { deleteVideoThunk, updateVideo } from "../../../Redux/playlist-reducer";
 import pencil from "../../../Assets/Images/pencil.png";
 import styles from "../Library.module.css";
@@ -95,11 +95,11 @@ const VideoCard = (props) =>{
             </div>
             <div className={styles.video_container__info}>
                 {nameEditMode?<input className={styles.info__video_name_edit}  value={name} autoFocus={true} onBlur={onNameEdit} onChange={onNameChange}/>: 
-                <p onMouseEnter={onNameHover} onMouseLeave={onNameHover} className={getTextClass(props.theme, styles, "info__video_name")} onDoubleClick={onNameEdit}>
-                    <span>{name}</span> {isNameHover?<img className={getElementClass(props.theme, styles, "info__video_name_edit_pencil")} onClick={onNameEdit} src={pencil} alt={"pencil"}/>:null}
+                <p onMouseEnter={onNameHover} onMouseLeave={onNameHover} className={getClass(props.theme, styles, "info__video_name", "text")} onDoubleClick={onNameEdit}>
+                    <span>{name}</span> {isNameHover?<img className={getClass(props.theme, styles, "info__video_name_edit_pencil")} onClick={onNameEdit} src={pencil} alt={"pencil"}/>:null}
                 </p>}
                
-                <a href={link} className={getTextClass(props.theme, styles, "info__video_link")}>Перейти к источнику</a>
+                <a href={link} className={getClass(props.theme, styles, "info__video_link", "text")}>Перейти к источнику</a>
             </div>
         </div>
     )

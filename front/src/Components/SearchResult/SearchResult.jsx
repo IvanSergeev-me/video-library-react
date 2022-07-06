@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux';
 import { withTheme } from '../HOC/withTheme';
 import VideoCard from '../Library/VideoCard/VideoCard';
 import styles from './SearchResult.module.css';
-import { getTextClass } from '../../Assets/classHelper/classHelper';
+import { getClass } from '../../Assets/classHelper/classHelper';
 
 const SearchResult = (props) => {
     let result = useSelector(state => state.search.videos);
     let theme = props.theme;
-    if(result.length === 0) return <div className={getTextClass(theme, styles, "result_section__heading")}>Ничего не нашлось :\</div>
+    if(result.length === 0) return <div className={getClass(theme, styles, "result_section__heading","color")}>Ничего не нашлось :\</div>
     let resultData = result.map(video=><VideoCard
         draggable={false}
         key = {video.id}
@@ -23,7 +23,7 @@ const SearchResult = (props) => {
         />)
     return ( 
         <div className={styles.result_section}>
-            <h2 className={getTextClass(theme, styles, "result_section__heading")}>Результаты поиска - найдено: {result.length}</h2>
+            <h2 className={getClass(theme, styles, "result_section__heading","color")}>Результаты поиска - найдено: {result.length}</h2>
             <div className={styles.result_section__videos}>
                 {resultData}
             </div>

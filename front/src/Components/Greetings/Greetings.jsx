@@ -3,7 +3,7 @@ import styles from './Greetings.module.css';
 import Carousel from 'react-spring-3d-carousel';
 import { config } from "react-spring";
 import {slides} from "./slides.js";
-import {getButtonClass, getSectionClass, getTextClass} from "../../Assets/classHelper/classHelper";
+import {getClass} from "../../Assets/classHelper/classHelper";
 import { NavLink } from "react-router-dom";
 import { withTheme } from "../HOC/withTheme";
 
@@ -11,9 +11,9 @@ const Greetings = (props) =>{
 
     let theme = props.theme;
     
-    let greetingsClass = getSectionClass(theme, styles);
-    let buttonColorClass = getButtonClass(theme, styles);
-    let textColorClass = getTextClass(theme, styles);
+    let greetingsClass = getClass(theme, styles,"section");
+    let buttonColorClass = getClass(theme, styles,"button");
+    let textColorClass = getClass(theme, styles, "color", "text");
 
     return(
         <section className={greetingsClass}>
