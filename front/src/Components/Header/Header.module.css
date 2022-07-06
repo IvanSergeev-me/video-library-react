@@ -28,11 +28,11 @@ height: var(--hex-parent-height);
 .button:not(:first-child) {
     margin-left: 1em;
 }
-.buttonColor_default{
+.button_default{
     color: white;
     background-color:#c95667;
 }
-.buttonColor_light{
+.button_light{
     color: white;
     background-color:#350134;
 }
@@ -57,6 +57,9 @@ height: var(--hex-parent-height);
     align-items: center;
     display: flex;
 }
+.text{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
 .header__nav{
     width: 100%;
     display: flex;
@@ -72,9 +75,9 @@ height: var(--hex-parent-height);
     font-family: 'Roboto', sans-serif;
     font-size: 1em;
 }
-.color_default{
+.text_default{
     color:white;
 }
-.color_light{
+.text_light{
     color:black;
 }

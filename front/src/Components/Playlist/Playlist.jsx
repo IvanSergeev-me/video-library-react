@@ -109,6 +109,7 @@ const Playlist = (props) =>{
 
     const drop = (e, video) => {
         setItems(items.map((item)=>{
+            console.log(item)
         if(item.id === video.id){
             dispatch(updateVideoPriority(item.id, currentItem.priority));
             return {...item, priority:currentItem.priority}

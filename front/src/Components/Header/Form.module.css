@@ -20,11 +20,11 @@
 .light_element_theme{
     border-bottom: 2px solid #350134;
 }
-.buttonColor_default{
+.form__button_default{
     color: white;
     background-color:#c95667;
 }
-.buttonColor_light{
+.form__button_light{
     color: white;
     background-color:#350134;
 }

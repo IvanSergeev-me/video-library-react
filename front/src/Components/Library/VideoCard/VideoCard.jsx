@@ -104,5 +104,5 @@ const VideoCard = (props) =>{
         </div>
     )
 }
-export default VideoCard;
+export default React.memo(VideoCard);
 
